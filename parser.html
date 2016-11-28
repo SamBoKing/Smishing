@@ -2,11 +2,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!--<script src="js/jquery-3.1.1.min.js"></script>-->
+     <script src="https://rawgit.com/SamBoKing/Smishing/master/jquery-3.1.1.min.js"></script>
     <title>Parser</title>
     <script>
         $(function() {
-           alert('init!');
+            $.ajax({
+                url : 'https://rawgit.com/SamBoKing/Smishing/master/data.json',
+                dataType : 'json'
+            })
+            .done(function(data) {
+                alert(JSON.stringify(data));
+            });
         });
     </script>
 </head>
