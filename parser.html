@@ -7,11 +7,11 @@
     <script>
         $(function() {
             $.ajax({
-                url : 'https://rawgit.com/SamBoKing/Smishing/master/data.json',
-                dataType : 'json'
+                url : 'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7021020600&bsNm=%BA%B9%C7%F6%BF%C0%B0%C5%B8%AE1',
+                dataType : 'html'
             })
             .done(function(data) {
-                alert(JSON.stringify(data));
+                alert(data);
             });
         });
     </script>
