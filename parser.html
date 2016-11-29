@@ -2,21 +2,38 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!--<script src="js/jquery-3.1.1.min.js"></script>-->
+    <!--<script src="js/jquery.ajax-cross-origin.min.js"></script>-->
+    <script src="https://rawgit.com/SamBoKing/Smishing/master/jquery-3.1.1.min.js"></script>
+    <script src="https://rawgit.com/SamBoKing/Smishing/master/jquery.ajax-cross-origin.min.js"></script>
     <title>Parser</title>
     <script>
+        var obj = [];
         $(function() {
             $.ajax({
-                url : 'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7021020600&bsNm=%BA%B9%C7%F6%BF%C0%B0%C5%B8%AE1',
-                dataType : 'html'
-            })
-            .done(function(data) {
-                alert(data);
+                crossOrigin : true,
+                async : false,
+                charset : 'euc-kr',
+                url : 'http://m.businfo.go.kr/bp/m/realTime.do?act=arrInfo&bsId=7021020600&bsNm=복현오거리',
+                success: function(data) {
+                    var html = $($.parseHTML(data));
+                    html.find('.bl.ai li').each(function(i, e) {
+                        var me = $(e);
+                        obj.push({
+                            cls : me.attr('class'),
+                            num : me.find('.route_no').text(),
+                            sta : me.find('.arr_state').text(),
+                            pos : me.find('.cur_pos').text(),
+                            ns : me.find('.cur_pos.nsbus').length > 0
+                        });
+                    });
+                    $('body').text(JSON.stringify(obj));
+                },
+                error: function(data) {  }
             });
         });
     </script>
 </head>
 <body>
-
 </body>
 </html>
